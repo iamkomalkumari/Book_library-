@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        table thead tr {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 18px;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results</h1>
+
+        {% if pid %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th>publication</th>
+                    <th>Book Types</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in pid %}
+                <tr>
+                    <td scope="row">{{ forloop.counter }}</td>
+                    <td>{{ i.book }}</td>
+                    <td>{{ i.author }}</td>
+                    <td>{{ i.publication }}</td>
+                    <td>{{ i.booktypes }}</td>
+                    <td>{{ i.date|date:'d-m-Y' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-results">No results found.</p>
+        {% endif %}
+
+        <a href="{% url 'index' %}">Back to Home</a>
+    </div>
+
+
+    
+</body>
+</html>
